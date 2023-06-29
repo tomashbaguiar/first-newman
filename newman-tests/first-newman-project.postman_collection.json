@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "ec7e8af9-536d-408b-b24a-1b0253b2605b",
+		"name": "First Newman Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14304016"
+	},
+	"item": [
+		{
+			"name": "Weather Forecast",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/{{endpoint}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{endpoint}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.collectionVariables.set(\"protocol\", \"http\");",
+					"pm.collectionVariables.set(\"hostname\", \"localhost\");",
+					"pm.collectionVariables.set(\"port\", \"5232\");",
+					"",
+					"var endpoint = \"weatherforecast\";",
+					"pm.collectionVariables.set(\"endpoint\", endpoint);",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var protocol = pm.collectionVariables.get('protocol');",
+					"var hostname = pm.collectionVariables.get('hostname');",
+					"var port = pm.collectionVariables.get('port');",
+					"var endpoint = pm.collectionVariables.get('endpoint');",
+					"",
+					"var days = 1;",
+					"do {",
+					"    var updatedEndpoint = `${endpoint}?days=${days}`;",
+					"",
+					"    var request = `${protocol}://${hostname}:${port}/${updatedEndpoint}`;",
+					"    console.log(`Request: ${request}`);",
+					"",
+					"    pm.test(\"Status code is 200\", () => {",
+					"        pm.sendRequest(request, (err, response) => {",
+					"            pm.response.to.have.status(200);",
+					"        });",
+					"    });",
+					"} while(++days < 6);",
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "protocol",
+			"value": ""
+		},
+		{
+			"key": "hostname",
+			"value": ""
+		},
+		{
+			"key": "port",
+			"value": ""
+		},
+		{
+			"key": "endpoint",
+			"value": ""
+		}
+	]
+}
