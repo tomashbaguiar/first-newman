@@ -1,4 +1,4 @@
-namespace FirstNewman.Api;
+namespace FirstNewman.Api.Models;
 
 public class WeatherForecast
 {

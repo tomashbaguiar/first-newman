@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "93628739-f05b-4439-a9e3-3391e938be81",
+		"name": "first newman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14304016"
+	},
+	"item": [
+		{
+			"name": "Forecast",
+			"item": [
+				{
+					"name": "Get Forecast",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{endpoint}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{endpoint}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var protocol = pm.environment.get('protocol');",
+							"pm.collectionVariables.set('protocol', protocol);",
+							"",
+							"var host = pm.environment.get('host');",
+							"pm.collectionVariables.set('host', host);",
+							"",
+							"var port = pm.environment.get('port');",
+							"pm.collectionVariables.set('port', port);",
+							"",
+							"var endpoint = 'weatherforecast';",
+							"pm.collectionVariables.set('endpoint', endpoint);"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
