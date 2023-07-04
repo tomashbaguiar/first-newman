@@ -1,14 +1,9 @@
 name: Api testing
 on:
-  push:
-    branches:
-      - "main"
   pull_request:
-    branches:
-      - "main"
 
 jobs:
-  build:
+  build-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,8 +27,9 @@ jobs:
           
       - name: Show test results
         uses: actions/upload-artifact@v3
+        if: success() || failure()
         with:
           name: Reports
-          path: testArtifacts
+          path: testArtifacts/htmlreport.html
           if-no-files-found: error
 
