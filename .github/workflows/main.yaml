@@ -23,6 +23,5 @@ jobs:
         run: mkdir -p testArtifacts
 
       - name: Run newman tests
-        run: newman run test/newman-testing/first-newman.postman_collection.json -e test/newman-testing/first-newman.postman_environment.json
-        # run: newman run test/newman-testing/first-newman.postman_collection.json -e test/newman-testing/first-newman.postman_environment.json -r htmlextra --reporter-htmlextra-export testArtifacts/htmlreport.html
+        run: newman run test/newman-testing/first-newman.postman_collection.json -e test/newman-testing/first-newman.postman_environment.json -r htmlextra --reporter-htmlextra-export ./results/report.html --reporter-htmlextra-displayProgressBar
 
