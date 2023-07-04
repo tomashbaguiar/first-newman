@@ -32,3 +32,9 @@ jobs:
           name: test-results
           path: testArtifacts/result.xml
 
+      - uses: dorny/test-reporter@v1
+        name: Newman Tests
+        path: testArtifacts/*.xml
+        reporter: xunit
+        fail-on-error: true
+
