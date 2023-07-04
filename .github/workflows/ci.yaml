@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install newman and test reporter
-        run: npm install -g newman newman-reporter-junit
+        run: npm install -g newman
 
       - name: Build docker image
         run: docker build --tag first-newman .
@@ -19,23 +19,6 @@ jobs:
       - name: Run project
         run: docker run -d -p 5000:80 first-newman
 
-      - name: Create directory to upload test results
-        run: mkdir -p testArtifacts
-
       - name: Run newman tests
-        run: newman run test/newman-testing/first-newman.postman_collection.json -e test/newman-testing/first-newman.postman_environment.json -r junit --reporter-junit-export jest-junit.xml
-
-      - uses: actions/upload-artifact@v3
-        if: success() || failure()
-        with:
-          name: test-results
-          path: jest-junit.xml
-
-      - uses: dorny/test-reporter@v1
-        if: always()
-        with:
-          name: Newman Tests
-          path: '**/jest-*.xml'
-          reporter: jest-junit
-          fail-on-error: true
+        run: newman run test/newman-testing/first-newman.postman_collection.json -e test/newman-testing/first-newman.postman_environment.json
 
