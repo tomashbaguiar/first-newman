@@ -1,4 +1,4 @@
-name: Api testing
+name: 'Continuous Integration'
 on:
   pull_request:
 
@@ -25,7 +25,7 @@ jobs:
       - name: Run newman tests
         run: newman run test/newman-testing/first-newman.postman_collection.json -e test/newman-testing/first-newman.postman_environment.json -r xunit --reporter-xunit-export testArtifacts/result.xml
 
-      - name: Upload artifacts
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         if: success() || failure()
         with:

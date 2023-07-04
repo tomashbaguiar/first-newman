@@ -1,0 +1,17 @@
+name: Test report
+on:
+  workflow_run:
+    workflows: [ 'Continuous Integration' ]
+    types:
+      - completed
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dorny/test-reporter@v1
+        name: Newman Tests
+        path: testArtifacts/*.xml
+        reporter: xunit
+        fail-on-error: true
+
