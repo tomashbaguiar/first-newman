@@ -23,6 +23,7 @@ public class WeatherForecastController : ControllerBase
     public IEnumerable<WeatherForecast> Get([FromQuery] int days)
     {
         _logger.LogInformation("Received {Action} request", nameof(Get));
+        throw new NotImplementedException();
         IEnumerable<WeatherForecast> forecast = Enumerable.Range(1, days)
             .Select(index => new WeatherForecast
                     {
