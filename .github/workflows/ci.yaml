@@ -34,7 +34,9 @@ jobs:
 
       - uses: dorny/test-reporter@v1
         name: Newman Tests
-        path: testArtifacts/*.xml
-        reporter: xunit
-        fail-on-error: true
+        if: always()
+        with:
+          path: testArtifacts/*.xml
+          reporter: xunit
+          fail-on-error: true
 
