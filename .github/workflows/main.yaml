@@ -15,8 +15,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install newman
-        run: npm install -g newman
+      - name: Install newman and test reporter
+        run: npm install -g newman newman-reporter-html
 
       - name: Build docker image
         run: docker build --tag first-newman .
@@ -25,5 +25,5 @@ jobs:
         run: docker run -d -p 5000:80 first-newman
 
       - name: Run newman tests
-        run: newman run test/newman-testing/first-newman.postman_collection.json -e test/newman-testing/first-newman.postman_environment.json
+        run: newman run test/newman-testing/first-newman.postman_collection.json -e test/newman-testing/first-newman.postman_environment.json -r html
 
