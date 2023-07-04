@@ -33,9 +33,9 @@ jobs:
           path: testArtifacts/result.xml
 
       - uses: dorny/test-reporter@v1
-        name: Newman Tests
         if: always()
         with:
+          name: Newman Tests
           path: testArtifacts/*.xml
           reporter: xunit
           fail-on-error: true
