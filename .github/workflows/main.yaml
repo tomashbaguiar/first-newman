@@ -31,8 +31,9 @@ jobs:
         run: newman run test/newman-testing/first-newman.postman_collection.json -e test/newman-testing/first-newman.postman_environment.json -r htmlextra --reporter-htmlextra-export testArtifacts/htmlreport.html
           
       - name: Show test results
-        uses: actions/upload-artifacts@v3
+        uses: actions/upload-artifact@v3
         with:
           name: Reports
           path: testArtifacts
+          if-no-files-found: error
 
